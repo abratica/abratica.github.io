@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Andrew Bratica — Ghostwriter for Founders</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #F7F4EF;
+      --ink: #1A1814;
+      --ink-light: #6B6760;
+      --accent: #C8A97E;
+      --border: #E2DDD6;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 1.5rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+    }
+
+    .nav-name {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.15rem;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-link {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--ink-light);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover { color: var(--ink); }
+
+    /* HERO */
+    .hero {
+      padding: 14rem 4rem 8rem;
+      max-width: 900px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.9s ease forwards 0.1s;
+    }
+
+    .hero-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+
+    .hero-headline {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--ink);
+      margin-bottom: 2rem;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--ink-light);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--ink-light);
+      max-width: 520px;
+      line-height: 1.8;
+    }
+
+    /* DIVIDER */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin: 0 4rem;
+      width: calc(100% - 8rem);
+    }
+
+    /* SECTION */
+    section {
+      padding: 6rem 4rem;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 3rem;
+    }
+
+    /* HOW IT WORKS */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 3rem;
+    }
+
+    .step-num {
+      font-family: 'EB Garamond', serif;
+      font-size: 2.5rem;
+      color: var(--border);
+      margin-bottom: 1rem;
+      line-height: 1;
+    }
+
+    .step-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+
+    .step-body {
+      font-size: 0.9rem;
+      color: var(--ink-light);
+      line-height: 1.75;
+    }
+
+    /* FOR FOUNDERS */
+    .for-founders {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 6rem 4rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    .for-founders .section-label { color: var(--accent); }
+
+    .founder-headline {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.3;
+      max-width: 640px;
+      margin-bottom: 2.5rem;
+    }
+
+    .founder-headline em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .founder-points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 520px;
+    }
+
+    .founder-points li {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: rgba(247, 244, 239, 0.7);
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .founder-points li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    /* CONTACT */
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .contact-headline {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 400;
+      line-height: 1.25;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-sub {
+      font-size: 0.95rem;
+      color: var(--ink-light);
+      line-height: 1.8;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+    }
+
+    input, textarea {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--ink);
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: 0.6rem 0;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    input:focus, textarea:focus {
+      border-bottom-color: var(--ink);
+    }
+
+    textarea {
+      resize: none;
+      height: 80px;
+    }
+
+    button[type="submit"] {
+      margin-top: 0.5rem;
+      padding: 0.9rem 2.5rem;
+      background: var(--ink);
+      color: var(--cream);
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    button[type="submit"]:hover { background: #2d2a25; }
+    button[type="submit"]:active { transform: scale(0.98); }
+
+    .success-msg {
+      display: none;
+      font-size: 0.9rem;
+      color: var(--accent);
+      margin-top: 1rem;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 2.5rem 4rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-name {
+      font-family: 'EB Garamond', serif;
+      font-size: 1rem;
+      color: var(--ink-light);
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--ink-light);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 0.35s; }
+    .delay-3 { animation-delay: 0.5s; }
+    .delay-4 { animation-delay: 0.65s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 1.25rem 1.5rem; }
+      .hero { padding: 10rem 1.5rem 5rem; }
+      section { padding: 4rem 1.5rem; }
+      .for-founders { padding: 4rem 1.5rem; }
+      .divider { margin: 0 1.5rem; width: calc(100% - 3rem); }
+      .contact-wrap { grid-template-columns: 1fr; gap: 3rem; }
+      footer { padding: 2rem 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="nav-name">Andrew Bratica</a>
+    <a href="#contact" class="nav-link">Work with me</a>
+  </nav>
+
+  <div class="hero">
+    <p class="hero-label">Ghostwriter for Founders</p>
+    <h1 class="hero-headline">Your story is<br>already compelling.<br><em>It just isn't being told.</em></h1>
+    <p class="hero-sub">I work with Series A founders to turn their experience, expertise, and origin story into consistent LinkedIn presence — without adding anything to their plate.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <section class="delay-1">
+    <p class="section-label">How it works</p>
+    <div class="steps">
+      <div>
+        <div class="step-num">01</div>
+        <div class="step-title">I research your story</div>
+        <div class="step-body">Before we speak I read everything — your interviews, your talks, your background. I come to you already knowing what makes your story worth telling.</div>
+      </div>
+      <div>
+        <div class="step-num">02</div>
+        <div class="step-title">One conversation</div>
+        <div class="step-body">A single onboarding call where I ask the questions nobody else asks. Your voice, your frameworks, your perspective — captured once, used indefinitely.</div>
+      </div>
+      <div>
+        <div class="step-num">03</div>
+        <div class="step-title">Content shows up</div>
+        <div class="step-body">Posts land in a shared doc on a consistent schedule. You glance, approve, and they go live. That's the entire time commitment.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="for-founders delay-2">
+    <p class="section-label">Who this is for</p>
+    <h2 class="founder-headline">You raised a Series A.<br>You have <em>a real story</em> to tell.<br>And LinkedIn is silent.</h2>
+    <ul class="founder-points">
+      <li>Your future investors are watching your online presence</li>
+      <li>The best candidates Google you before applying</li>
+      <li>Your peers are building audiences while you're building product</li>
+      <li>You know you should be posting — you just never get to it</li>
+    </ul>
+  </div>
+
+  <section id="contact" class="delay-3">
+    <p class="section-label">Get in touch</p>
+    <div class="contact-wrap">
+      <div>
+        <h2 class="contact-headline">Let's see if it's a fit.</h2>
+        <p class="contact-sub">Fill out the form and I'll be in touch within 24 hours. No pitch, no pressure — just a quick conversation to see if what I do makes sense for where you are right now.</p>
+      </div>
+      <form id="contact-form" action="https://formspree.io/f/xykbwnya" method="POST">
+        <div class="field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="field">
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="field">
+          <label for="company">Company</label>
+          <input type="text" id="company" name="company" />
+        </div>
+        <div class="field">
+          <label for="message">Anything else</label>
+          <textarea id="message" name="message" placeholder="Optional"></textarea>
+        </div>
+        <button type="submit">Send</button>
+        <p class="success-msg" id="success">Thanks — I'll be in touch shortly.</p>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-name">Andrew Bratica</span>
+    <span class="footer-copy">© 2026 bratica-ghostwriting.com</span>
+  </footer>
+
+  <script>
+    const form = document.getElementById('contact-form');
+    const success = document.getElementById('success');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        form.reset();
+        success.style.display = 'block';
+      }
+    });
+  </script>
+
+</body>
+</html>
